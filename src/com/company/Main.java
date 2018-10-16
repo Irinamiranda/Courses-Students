@@ -7,69 +7,71 @@ public class Main {
 
     public static void main(String[] args) {
         //create ArrayLists to keep persons and courses
-        ArrayList<Teacher> teachers = new ArrayList<>();
-        ArrayList<Student> students = new ArrayList<>();
         ArrayList<Course> courses = new ArrayList<>();
-        courses.add(new Course("Biology", "12030", "Anna Soboleva"));
-        courses.add(new Course("English", "46537", "Emily Garcia"));
-        courses.add(new Course("programming", "64537", "Debora March"));
+        courses.add(new Course("Math", "12030"));
+        courses.add(new Course("English", "46537"));
+        courses.add(new Course("Programming", "64537"));
 
-        while (true) {
-            System.out.println("What person do you wish to add? teacher/student/course/list/exit");
-            Scanner scan = new Scanner(System.in);
-            String answer = scan.nextLine();
-            if (answer.equalsIgnoreCase("teacher")) {
-                teachers.add(addTeacher());
+        ArrayList<Teacher> teachers = new ArrayList<>();
+        teachers.add(new Teacher("Albert", "Einstein", "ae@gmail.com", "1"));
+        teachers.add(new Teacher("Nikola", "Tesla", "nt@gmail.com", "2"));
+        teachers.add(new Teacher("Ada", "Lovelace", "al@gmail.com", "3"));
+        teachers.add(new Teacher("Charles", "Babbage", "cb@gmail.com", "4"));
 
-                for (Teacher teacher : teachers) {
-                    System.out.println(teacher.getFirstName() + " " + teacher.getLastName() + " " + teacher.geteMail() + " " + teacher.getNumberID() + " teaches " + teacher.getTeaches());
-                }
-
-
-            } else if (answer.equalsIgnoreCase("student")) {
-                students.add(addStudent());
-
-                for (Student student : students) {
-                    System.out.println(student.getFirstName() + " " + student.getLastName() + " " + student.geteMail() + " " + student.getNumberID() + " takes " + student.getTakes());
-                }
-
-            } else if (answer.equalsIgnoreCase("course")) {
-                courses.add(addCourse());
+        courses.get(0).getTaughtBy().add(teachers.get(1));
+        courses.get(0).getTaughtBy().add(teachers.get(2));
+        courses.get(1).getTaughtBy().add(teachers.get(0));
+        courses.get(1).getTaughtBy().add(teachers.get(1));
+        courses.get(2).getTaughtBy().add(teachers.get(2));
 
 
-                for (Course course : courses) {
-                    System.out.println(course.getCourseName() + " " + course.getCourseID() + "taught by: " + course.getTaughtBy() + "taken by: " + course.getTakenBy());
-                }
+
+        ArrayList<Student> students = new ArrayList<>();
+        students.add(new Student("Irina", "Smirnova", "is@gmail.com", "245"));
+        students.add(new Student("Andrey", "Smirnov", "as@gmail.com", "249"));
+        students.add(new Student("Galina", "Kutarina", "gk@gmail.com", "246"));
+
+        courses.get(0).getTakenBy().add(students.get(1));
+        courses.get(0).getTakenBy().add(students.get(2));
+        courses.get(1).getTakenBy().add(students.get(1));
+        courses.get(2).getTakenBy().add(students.get(0));
 
 
-            } else if (answer.equalsIgnoreCase("list")) {
-                System.out.println("What List do you wish to see? teacher/student/course");
-                String myAnswer = scan.nextLine();
-                if (myAnswer.equalsIgnoreCase("teacher")) {
-                    System.out.println("Teachers List");
-                    for (Teacher teacher : teachers) {
-                        System.out.println(teacher.getFirstName() + " " + teacher.getLastName() + " " + teacher.geteMail() + " " + teacher.getNumberID() + " teaches: "  + teacher.getTeaches());
-                    }
-                }
-                if (myAnswer.equalsIgnoreCase("student")) {
-                    System.out.println("Students List");
-                    for (Student student : students) {
-                        System.out.println(student.getFirstName() + " " + student.getLastName() + " " + student.geteMail() + " " + student.getNumberID() + " takes " + student.getTakes());
-                    }
-                }
-                if (myAnswer.equalsIgnoreCase("course")) {
-                    System.out.println("Course List");
-                    for (Course course : courses) {
-                        System.out.println(course.getCourseName() + " " + course.getCourseID() + " " + " taught by: " + course.getTaughtBy());
-                    }
-                }
-            } else if (answer.equalsIgnoreCase("exit")) {
-                break;
-            }
+        listCourses(courses);
+     //   listTeachers(teachers);
+//        listStudents(students);
 
+
+
+    }
+
+    public static void listStudents(ArrayList<Student> students) {
+        for (Student student : students) {
+            System.out.println("==============");
+            System.out.println("student " + student.getFirstName() + " " + student.getLastName());
+            System.out.println("id   : " + student.getNumberID());
+            System.out.println("email: " + student.geteMail());
+          //  System.out.println("takes: " + student.getTakes());
         }
+    }
+    public static void listTeachers(ArrayList<Teacher> teachers) {
+        for (Teacher teacher : teachers) {
+            System.out.println("==============");
+            System.out.println("teacher " + teacher.getFirstName() + " " + teacher.getLastName());
+            System.out.println("id   : " + teacher.getNumberID());
+            System.out.println("email: " + teacher.geteMail());
+//            System.out.println("teaches: " + teacher.getTeaches());
+        }
+    }
 
+    public static void listCourses(ArrayList<Course> courses) {
+        for (Course course : courses) {
+            System.out.println("==============");
+            System.out.println(course);
 
+            System.out.println("Taught by: " + course.getTaughtBy());
+            System.out.println("Taken by : " + course.getTakenBy());
+        }
     }
     //create a method to add person
 
@@ -134,7 +136,7 @@ public class Main {
 
        System.out.println("Enter the class that student takes");
        String takes = s.nextLine();
-       newStudent.setTakes(takes);
+//       newStudent.setTakes(takes);
 
 
        return newStudent;
@@ -170,7 +172,7 @@ public class Main {
 
        System.out.println("Enter the class that teacher teaches");
        String teaches = s.nextLine();
-       newTeacher.setTeaches(teaches);
+//       newTeacher.setTeaches(teaches);
 
 
        return newTeacher;
@@ -194,12 +196,12 @@ public class Main {
         System.out.println("Enter the first and last name of teacher");
         String name = scan.nextLine();
 
-        newCourse.setTaughtBy(name);
+//        newCourse.setTaughtBy(name);
 
         System.out.println("Enter the first and last name of student");
         String name2 = scan.nextLine();
 
-        newCourse.setTakenBy(name2);
+//        newCourse.setTakenBy(name2);
 
 
         return newCourse;

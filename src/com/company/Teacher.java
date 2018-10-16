@@ -1,24 +1,18 @@
 package com.company;
 
 public class Teacher extends Person {
-    private String teaches;
 
     public Teacher() {
 
     }
 
-    public Teacher(String firstName, String lastName, String email, String numberID, String teaches) {
+    public Teacher(String firstName, String lastName, String email, String numberID) {
         super(firstName, lastName, email, numberID);
-        this.teaches = teaches;
 
     }
 
-
-    public String getTeaches() {
-        return teaches;
-    }
-
-    public void setTeaches(String teaches) {
-        this.teaches = teaches;
+    @Override
+    public String toString() {
+        return "First name " + getFirstName() + " Last name " + getLastName();
     }
 }

@@ -1,18 +1,23 @@
 package com.company;
 
+import java.util.ArrayList;
+
 public class Course {
     private String courseName;
     private String courseID;
-    private String taughtBy;
 
+    public ArrayList<Student> getTakenBy() {
+        return takenBy;
+    }
 
-    public String getTaughtBy() {
+    private ArrayList<Student> takenBy;
+
+    public ArrayList<Teacher> getTaughtBy() {
         return taughtBy;
     }
 
-    public void setTaughtBy(String taughtBy) {
-        this.taughtBy = taughtBy;
-    }
+    private ArrayList<Teacher> taughtBy;
+
 
     public String getCourseName() {
         return courseName;
@@ -31,15 +36,21 @@ public class Course {
     }
 
     public Course(){
+        this.takenBy = new ArrayList<>();
+        this.taughtBy = new ArrayList<>();
 
     }
-    public Course(String courseName, String courseID,  String taughtBy){
+    public Course(String courseName, String courseID){
         this.courseName = courseName;
         this.courseID = courseID;
-        this.taughtBy = taughtBy;
+        this.takenBy = new ArrayList<>();
+        this.taughtBy = new ArrayList<>();
+
 
     }
 
-
-
+    @Override
+    public String toString() {
+        return "course id:" + getCourseID() + ", name:" + getCourseName();
+    }
 }

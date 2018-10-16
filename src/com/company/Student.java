@@ -2,22 +2,22 @@ package com.company;
 
 public class Student extends Person {
 
-    private Course takes;
+
 
     public Student(){
 
     }
 
-    public Student(String firstName, String lastName, String eMail, String numberID, Course takes){
+    public Student(String firstName, String lastName, String eMail, String numberID){
         super(firstName, lastName, eMail, numberID);
-        this.takes = takes;
+
     }
 
-    public Course getTakes() {
-        return takes;
+    @Override
+    public String toString() {
+        return "First name " + getFirstName() + " Last name " + getLastName();
     }
 
-    public void setTakes(Course takes) {
-        this.takes = takes;
-    }
+
+
 }
